@@ -16,10 +16,19 @@ module.exports = {
             console.log(e);
         }
 
-        if ($.isArray(todos)) {
-            return todos;
-        } else {
-            return [];
-        }
+        return $.isArray(todos) ? todos : [];
+    },
+    filterTodos: function(todos, showCompleted, searchText) {
+        var filteredTodos = todos;
+
+        // filter by show completed
+        filteredTodos = filteredTodos.filter((todo) => {
+            return !todo.completed  || showCompleted;
+        });
+
+        // filter by search text
+        
+        
+        return filteredTodos;
     }
 };
