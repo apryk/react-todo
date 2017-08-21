@@ -56,7 +56,7 @@ describe('Reducers', () => {
         completedAt: 123
       }];
       // res contains new state
-      let res = reducers.toggleTodoReducer(df(todos), df(action));
+      let res = reducers.todosReducer(df(todos), df(action));
 
       expect(res.length).toEqual(1);
       expect(res[0].completed).toEqual(false);

@@ -1,16 +1,16 @@
-let uuid = require('uuid');
-let moment = require('moment');
+var uuid = require('node-uuid');
+var moment = require('moment');
 
-export let searchTextReducer = (state = '', action) => {
-    switch (action.type) {
-      case 'SET_SEARCH_TEXT':
-        return action.searchText;
-      default:
-        return state;
-    };
+export var searchTextReducer = (state = '', action) => {
+  switch (action.type) {
+    case 'SET_SEARCH_TEXT':
+      return action.searchText;
+    default:
+      return state;
   };
-  
-export let showCompletedReducer = (state = false, action) => {
+};
+
+export var showCompletedReducer = (state = false, action) => {
   switch (action.type) {
     case 'TOGGLE_SHOW_COMPLETED':
       return !state;
@@ -19,41 +19,32 @@ export let showCompletedReducer = (state = false, action) => {
   }
 };
 
-export let todosReducer = (state = [], action) => {
+export var todosReducer = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-    return [
-      ...state,
-      {
-        id: uuid(),
-        text: action.text,
-        completed: false,
-        createdAt: moment().unix(),
-        completedAt: undefined
-      }
-    ];
-    default:
-      return state;
-  }
-};
-
-export let toggleTodoReducer = (state = [], action) => {
-  switch (action.type) {
+      return [
+        ...state,
+        {
+          id: uuid(),
+          text: action.text,
+          completed: false,
+          createdAt: moment().unix(),
+          completedAt: undefined
+        }
+      ];
     case 'TOGGLE_TODO':
       return state.map((todo) => {
         if (todo.id === action.id) {
-          let nextCompleted = !todo.completed;
+          var nextCompleted = !todo.completed;
 
           return {
             ...todo,
             completed: nextCompleted,
             completedAt: nextCompleted ? moment().unix() : undefined
           };
-
         }
       });
-
     default:
       return state;
   }
-}
+};
